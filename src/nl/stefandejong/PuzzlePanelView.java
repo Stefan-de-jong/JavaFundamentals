@@ -1,7 +1,6 @@
 package nl.stefandejong;
 
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -13,6 +12,11 @@ public class PuzzlePanelView extends JPanel implements Observer{
 	
 	private PuzzleModel puzzleModel;	
 	JButton[][] buttons = new JButton[PuzzleModel.ROWS][PuzzleModel.COLS];
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	
 	private ImageIcon img1 = new ImageIcon("resources/image01.png");
 	private ImageIcon img2 = new ImageIcon("resources/image02.png");
@@ -74,12 +78,7 @@ public class PuzzlePanelView extends JPanel implements Observer{
 				printTile(row, col);
 			}
 		}
-	}
-	
-	private void setImage() {
-		
-	}
-	
+	}	
 
 	@Override
 	public void update(Observable o, Object arg) {
