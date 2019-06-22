@@ -13,17 +13,11 @@ public class PuzzleController implements ActionListener {
 		this.puzzleModel = puzzleModel;
 		this.row = row;
 		this.col = col;
-	}
-
-	
-	
+	}	
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (!puzzleModel.moveTile(row, col))
-			Toolkit.getDefaultToolkit().beep();		
+		if (puzzleModel.isSolved() || !puzzleModel.moveTile(row, col))
+			Toolkit.getDefaultToolkit().beep();
 	}
-	
-	
-
 }

@@ -14,7 +14,7 @@ public class PuzzleConsoleView implements Observer{
 	
 	private void printTile(int row, int col) {		
 		if (puzzleModel.getValue(row, col) != -1)
-			System.out.printf("  %2d", puzzleModel.getValue(row, col));
+			System.out.printf("  %2d ", puzzleModel.getValue(row, col));
 			else System.out.printf(" [%2d]", puzzleModel.getValue(row, col));
 	}
 	

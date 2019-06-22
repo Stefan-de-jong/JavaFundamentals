@@ -10,6 +10,8 @@ public class SlidePuzzleApp extends JFrame{
 	PuzzleModel puzzleModel; 
 	PuzzleConsoleView consoleView;
 	PuzzlePanelView panelView;
+	StatusBalk statusBalk;
+	ButtonBar buttonBar;
 	
 	/**
 	 * 
@@ -40,9 +42,14 @@ public class SlidePuzzleApp extends JFrame{
 		consoleView = new PuzzleConsoleView(puzzleModel);
 		consoleView.refresh();
 		panelView = new PuzzlePanelView(puzzleModel);
+		statusBalk = new StatusBalk();
+		buttonBar = new ButtonBar();
+		
 
 		setVisible(true);
 		add(panelView, BorderLayout.CENTER);
+		add(statusBalk, BorderLayout.SOUTH);
+		add(buttonBar, BorderLayout.NORTH);
 		panelView.setVisible(true);
 		this.setResizable(false);
 	}
