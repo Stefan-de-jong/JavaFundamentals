@@ -5,23 +5,20 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-public class SlidePuzzleApp extends JFrame{
+public class PuzzleApplication extends JFrame{
 	
-	PuzzleModel puzzleModel; 
-	PuzzleConsoleView consoleView;
-	PuzzlePanelView panelView;
-	StatusBalk statusBalk;
-	ButtonBar buttonBar;
+	PuzzleModel puzzleModel; 		
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;	
 	
-	public SlidePuzzleApp() {
+	private PuzzleApplication() {
 		init();
 	}	
 	
+	// Maakt een nieuwe instantie van PuzzleModel en roept createGui aan
 	private void init(){
 		puzzleModel = new PuzzleModel();
 		SwingUtilities.invokeLater(new Runnable() {
@@ -32,31 +29,30 @@ public class SlidePuzzleApp extends JFrame{
 			}
 		});			
 	}
-
-
+	
+	// Maakt de GUI, stelt in dat deze niet te resizen is ivm proporties van de afbeeldingen
 	private void createGui() {		
-		setBounds(50, 50, 540, 540);
+		setBounds(650, 250, 540, 540);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		setTitle("Puzzle Game!");		
 
-		consoleView = new PuzzleConsoleView(puzzleModel);
-		consoleView.refresh();
-		panelView = new PuzzlePanelView(puzzleModel);
-		statusBalk = new StatusBalk();
-		buttonBar = new ButtonBar();
-		
-
+		@SuppressWarnings("unused")
+		PuzzleConsoleView consoleView = new PuzzleConsoleView(puzzleModel);		
+		PuzzlePanelView panelView = new PuzzlePanelView(puzzleModel);
+		StatusBalk statusBalk = new StatusBalk();
+		ButtonBar buttonBar = new ButtonBar();
 		setVisible(true);
+		
 		add(panelView, BorderLayout.CENTER);
 		add(statusBalk, BorderLayout.SOUTH);
 		add(buttonBar, BorderLayout.NORTH);
-		panelView.setVisible(true);
-		this.setResizable(false);
+		
+		this.setResizable(false);		
 	}
 	
 
 	public static void main(String[] args) {
-		new SlidePuzzleApp();
+		new PuzzleApplication();
 	}
 
 }

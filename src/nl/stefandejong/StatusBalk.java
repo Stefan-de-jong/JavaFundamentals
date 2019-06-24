@@ -15,6 +15,7 @@ public class StatusBalk extends JPanel{
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	// Maakt 2 labels aan in het paneel en hun horizontale positie in het paneel
 	public StatusBalk() {
 		label1 = new JLabel("Label 1 ...");
 		label2 = new JLabel("Label 2 ...");

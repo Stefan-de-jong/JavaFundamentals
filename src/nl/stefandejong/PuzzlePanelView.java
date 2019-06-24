@@ -11,29 +11,33 @@ import javax.swing.JPanel;
 public class PuzzlePanelView extends JPanel implements Observer{
 	
 	private PuzzleModel puzzleModel;	
-	JButton[][] buttons = new JButton[PuzzleModel.ROWS][PuzzleModel.COLS];
+	private JButton[][] buttons = new JButton[PuzzleModel.ROWS][PuzzleModel.COLS];
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private ImageIcon img1 = new ImageIcon("resources/image01.png");
-	private ImageIcon img2 = new ImageIcon("resources/image02.png");
-	private ImageIcon img3 = new ImageIcon("resources/image03.png");
-	private ImageIcon img4 = new ImageIcon("resources/image04.png");
-	private ImageIcon img5 = new ImageIcon("resources/image05.png");
-	private ImageIcon img6 = new ImageIcon("resources/image06.png");
-	private ImageIcon img7 = new ImageIcon("resources/image07.png");
-	private ImageIcon img8 = new ImageIcon("resources/image08.png");
-	private ImageIcon img9 = new ImageIcon("resources/image09.png");
-	private ImageIcon img10 = new ImageIcon("resources/image10.png");
-	private ImageIcon img11 = new ImageIcon("resources/image11.png");
-	private ImageIcon img12 = new ImageIcon("resources/image12.png");
-	private ImageIcon img13 = new ImageIcon("resources/image13.png");
-	private ImageIcon img14 = new ImageIcon("resources/image14.png");
-	private ImageIcon img15 = new ImageIcon("resources/image15.png");
+	// De resources, gekoppeld aan een icoon-variabele	
+	private ImageIcon img1 = new ImageIcon(getClass().getResource("/image01.png"));
+	private ImageIcon img2 = new ImageIcon(getClass().getResource("/image02.png"));
+	private ImageIcon img3 = new ImageIcon(getClass().getResource("/image03.png"));
+	private ImageIcon img4 = new ImageIcon(getClass().getResource("/image04.png"));
+	private ImageIcon img5 = new ImageIcon(getClass().getResource("/image05.png"));
+	private ImageIcon img6 = new ImageIcon(getClass().getResource("/image06.png"));
+	private ImageIcon img7 = new ImageIcon(getClass().getResource("/image07.png"));
+	private ImageIcon img8 = new ImageIcon(getClass().getResource("/image08.png"));
+	private ImageIcon img9= new ImageIcon(getClass().getResource("/image09.png"));
+	private ImageIcon img10 = new ImageIcon(getClass().getResource("/image10.png"));
+	private ImageIcon img11 = new ImageIcon(getClass().getResource("/image11.png"));
+	private ImageIcon img12 = new ImageIcon(getClass().getResource("/image12.png"));
+	private ImageIcon img13 = new ImageIcon(getClass().getResource("/image13.png"));
+	private ImageIcon img14 = new ImageIcon(getClass().getResource("/image14.png"));
+	private ImageIcon img15 = new ImageIcon(getClass().getResource("/image15.png"));	
 	
+	// Maakt op basis van het puzzlemodel een nieuwe gridlayout (rijen en kolommen) en knoppen
+	// Wordt aangemeld als observer zodat het panel op de hoogte blijft van updates
+	// Bij aanmaken van de knoppen wordt meteen de controller toegevoegd
 	public PuzzlePanelView(PuzzleModel puzzleModel) {
 		this.puzzleModel = puzzleModel;
 		puzzleModel.addObserver(this);
@@ -44,21 +48,13 @@ public class PuzzlePanelView extends JPanel implements Observer{
 				buttons[row][col] = new JButton();
 				buttons[row][col].setSize(135, 135);
 				buttons[row][col].addActionListener(new PuzzleController(puzzleModel, row, col));
-				if (puzzleModel.getValue(row, col) != -1) {
-					buttons[row][col].setIcon(getButtonIcon(puzzleModel.getValue(row, col)));
-				}
-				else {
-					buttons[row][col].setIcon(null);
-					buttons[row][col].setOpaque(false);
-					buttons[row][col].setContentAreaFilled(false);
-					buttons[row][col].setBorderPainted(false);
-				}	
+				printTile(row, col);				
 				this.add(buttons[row][col]);
 			}
 		}
 	}
 	
-	
+	// Zorgt voor het correcte icoon op een knop, afhankelijk van de waarde die deze heeft in het het onderliggende model
 	private void printTile(int row, int col) {
 		if (puzzleModel.getValue(row, col) != -1) {
 			buttons[row][col].setIcon(getButtonIcon(puzzleModel.getValue(row, col)));
@@ -69,9 +65,9 @@ public class PuzzlePanelView extends JPanel implements Observer{
 			buttons[row][col].setContentAreaFilled(false);
 			buttons[row][col].setBorderPainted(false);
 		}
-
 	}
 	
+	// Bij een update van het model zorgt deze methode voor het opnieuw 'printen' van alle tegels, waardoor de juiste iconen worden weergegeven
 	private void refresh() {
 		for (int row = 0; row < PuzzleModel.ROWS; row++) {
 			for (int col = 0; col <  PuzzleModel.COLS; col++) {
@@ -80,12 +76,13 @@ public class PuzzlePanelView extends JPanel implements Observer{
 		}
 	}	
 
+	// Bij notifyobservers wordt deze methode aangeroepen, welke refresh aanroept zodat het model opnieuw wordt weergegeven
 	@Override
 	public void update(Observable o, Object arg) {
-		refresh();
-		
+		refresh();		
 	}
 	
+	// Geeft op basis van de value terug wel icoon hierbij hoort
 	private ImageIcon getButtonIcon(int value) {
         switch ( value ) {
             case 1 :
@@ -121,7 +118,4 @@ public class PuzzlePanelView extends JPanel implements Observer{
         }
 		return null;
     }  
-	
-	
-
 }
