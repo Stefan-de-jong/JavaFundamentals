@@ -12,12 +12,15 @@ public class PuzzleModel extends Observable{
 	public static final int COLS = 4;
 	private int[][] tiles;
 	private int[][] correctTiles;
+	public int nMoves;
+	public int nCorrectTiles;
 	
 	// Door testInit aan te roepen (uncomment) ipv init en shuffle (beiden uit commenten) wordt een makkelijke oplosbare puzzel opgezet om te testen
 	public PuzzleModel() {
 		//testInit();
 		init();
 		shuffle();
+
 	}
 	
 	// Initialiseert de puzzel om te kunnen spelen
@@ -36,7 +39,7 @@ public class PuzzleModel extends Observable{
 					correctTiles[row][col] = -1;
 				}
 			}			
-		}		
+		}
 	}
 	
 	// Wisselt iedere tegel 1 keer, met een random andere tegel
@@ -49,6 +52,15 @@ public class PuzzleModel extends Observable{
 				swapTiles(row, col, (int)(Math.random()*ROWS), (int)(Math.random()*COLS));
 			}
 		}
+		nMoves = 0;		
+		setChanged();
+		notifyObservers();
+		
+	}
+	
+	public void reset() {
+		init();
+		shuffle();
 	}
 	
 	
@@ -83,7 +95,9 @@ public class PuzzleModel extends Observable{
 	private void swapTiles(int row1, int col1, int row2, int col2) {
 		int temp = tiles[row1][col1];
 		tiles[row1][col1] = tiles[row2][col2];
-		tiles[row2][col2] = temp;	
+		tiles[row2][col2] = temp;
+		nMoves++;
+		countCorrectTiles();
 	
 		// Als de tegels gewisseld zijn worden de observers op de hoogte gebracht zodat deze de nieuwe state van het model kunnen weergeven
 		setChanged();
@@ -93,6 +107,20 @@ public class PuzzleModel extends Observable{
 		if (isSolved()) {
 			Toolkit.getDefaultToolkit().beep();
 			JOptionPane.showMessageDialog(null, "You solved the puzzle!", "Congratulations!", JOptionPane.INFORMATION_MESSAGE);
+		}
+	}
+	
+	private void countCorrectTiles() {
+		nCorrectTiles = 0;
+		
+		for (int row = 0; row < ROWS; row++) {
+			for (int col = 0; col < COLS; col++) {
+				
+				if (tiles[row][col] == correctTiles[row][col]) {
+					nCorrectTiles++;					
+				}else
+					continue;				
+			}
 		}
 	}
 	
@@ -125,6 +153,8 @@ public class PuzzleModel extends Observable{
 			{5,6,7,8},
 			{9,10,11,12},
 			{13,14,15,-1}};
+			
+		countCorrectTiles();
 	}	
 	
 }

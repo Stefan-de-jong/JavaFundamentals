@@ -39,7 +39,7 @@ public class PuzzleApplication extends JFrame{
 		@SuppressWarnings("unused")
 		PuzzleConsoleView consoleView = new PuzzleConsoleView(puzzleModel);		
 		PuzzlePanelView panelView = new PuzzlePanelView(puzzleModel);
-		StatusBalk statusBalk = new StatusBalk();
+		StatusBalk statusBalk = new StatusBalk(puzzleModel);
 		ButtonBar buttonBar = new ButtonBar();
 		setVisible(true);
 		
