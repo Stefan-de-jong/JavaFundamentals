@@ -19,7 +19,7 @@ public class ButtonController implements ActionListener {
 			puzzleModel.reset();
 			break;
 		case "2" : 
-			//plaatsSchijf(1);
+			//ToDo;
 			break;				
 		}
 		
