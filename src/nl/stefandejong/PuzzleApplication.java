@@ -40,7 +40,7 @@ public class PuzzleApplication extends JFrame{
 		PuzzleConsoleView consoleView = new PuzzleConsoleView(puzzleModel);		
 		PuzzlePanelView panelView = new PuzzlePanelView(puzzleModel);
 		StatusBalk statusBalk = new StatusBalk(puzzleModel);
-		ButtonBar buttonBar = new ButtonBar();
+		ButtonBar buttonBar = new ButtonBar(puzzleModel);
 		setVisible(true);
 		
 		add(panelView, BorderLayout.CENTER);

@@ -58,6 +58,7 @@ public class PuzzleModel extends Observable{
 		
 	}
 	
+	// Reset het spel
 	public void reset() {
 		init();
 		shuffle();
@@ -110,6 +111,7 @@ public class PuzzleModel extends Observable{
 		}
 	}
 	
+	// Telt het aantal correcte tegels
 	private void countCorrectTiles() {
 		nCorrectTiles = 0;
 		

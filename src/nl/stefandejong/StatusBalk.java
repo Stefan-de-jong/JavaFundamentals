@@ -35,8 +35,8 @@ public class StatusBalk extends JPanel implements Observer{
 	}
 	
 	private void refresh() {
-		label1.setText("Aantal zetten: " + puzzleModel.nMoves);
-		label2.setText("Aantal correct: " + puzzleModel.nCorrectTiles);
+		label1.setText("Number of moves: " + puzzleModel.nMoves);
+		label2.setText("Number of correct tiles: " + puzzleModel.nCorrectTiles);
 	}
 
 	@Override
